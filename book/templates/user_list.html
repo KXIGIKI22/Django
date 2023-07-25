@@ -1,0 +1,16 @@
+<!-- user_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>USER LIST</title>
+</head>
+<body>
+    <h1>User List</h1>
+    <ul>
+        {% for user in object_list %}
+            <li><a href="{% url 'user_detail' user.pk %}">{{ user.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'user_create' %}">Створити нового користувача</a>
+</body>
+</html>
