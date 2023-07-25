@@ -9,8 +9,8 @@ class UserListView(View):
         return render(request, 'user_list.html', {'object_list': users})
 
 class UserDetailView(View):
-    def get(self, request, id, pk):
-        user = User.objects.get(pk=id)
+    def get(self, request, pk):
+        user = User.objects.get(pk=pk)
         return render(request, 'user_detail.html', {'user': user})
 
 class CreateUserView(View):
