@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Створення нового користувача</title>
+</head>
+<body>
+    <h1>Створення нового користувача</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Ім'я:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="age">Вік:</label>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <input type="submit" value="Створити">
+    </form>
+</body>
+</html>
+
+
+
+
+
+
