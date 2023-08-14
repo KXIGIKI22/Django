@@ -1,14 +1,8 @@
-#from django.http import HttpResponse
-
-#def my_users_view(request):
-#    return HttpResponse("Hello, users!")
-
-#def users_view(request):
-#    return HttpResponse("Hello, admin users!")
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .models import User, Purchase, Book
 from .serializers import UserSerializer, PurchaseSerializer, BookSerializer
+from your_app.tasks import print_text, print_purchase_count
 
 class UserListView(ListAPIView):
     queryset = User.objects.all()
@@ -33,3 +27,12 @@ class BookListView(ListAPIView):
 class BookDetailView(RetrieveAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+
+    def get(self, request, *args, **kwargs):
+
+        print_text.delay("Hello, Celery!")
+
+        user_id = 1
+        print_purchase_count.delay(user_id)
+
+        return super().get(request, *args, **kwargs)

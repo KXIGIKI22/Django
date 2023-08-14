@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from dotenv import load_dotenv
+from celery import Celery
 
 load_dotenv()
 
@@ -37,6 +38,14 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+app = Celery('Django22')
+BROKER_URL = 'redis://default:eEmCvH0ZDywTtBsCarHiFEwmUyfNz7tS@redis-14813.c304.europe-west1-2.gce.cloud.redislabs.com:14813'
+
+CELERY_RESULT_BACKEND = 'redis://default:eEmCvH0ZDywTtBsCarHiFEwmUyfNz7tS@redis-14813.c304.europe-west1-2.gce.cloud.redislabs.com:14813'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
