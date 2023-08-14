@@ -10,7 +10,9 @@
 #    path('purchases/', include('purchase.urls')),
 #]
 from django.urls import path
-from .views import UserListView, UserDetailView, PurchaseListView, PurchaseDetailView, BookListView, BookDetailView
+from myapp.views import UserListView
+
+#from myapp.views import UserListView, UserDetailView, PurchaseListView, PurchaseDetailView, BookListView, BookDetailView
 
 urlpatterns = [
     path('users/', UserListView.as_view(), name='user_list'),

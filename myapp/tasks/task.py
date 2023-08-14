@@ -1,7 +1,8 @@
-from celery import shared_task
+from celery import shared_task, Celery
 from django.contrib.auth.models import User
 from celery.utils.log import get_task_logger
 
+app = Celery('Django22')
 logger = get_task_logger(__name__)
 
 @shared_task

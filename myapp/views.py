@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView, RetrieveAPIView
-from .models import User, Purchase, Book
+#from .models import User, Purchase, Book
 from .serializers import UserSerializer, PurchaseSerializer, BookSerializer
-from your_app.tasks import print_text, print_purchase_count
+from myapp.tasks import print_text, print_purchase_count
+from myapp.serializers import UserSerializer, PurchaseSerializer, BookSerializer
 
 class UserListView(ListAPIView):
     queryset = User.objects.all()
