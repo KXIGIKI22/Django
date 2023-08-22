@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from dotenv import load_dotenv
+from celery import Celery
+from celery.schedules import crontab
 
 load_dotenv()
 
@@ -35,8 +37,23 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
+app = Celery('Django22')
+BROKER_URL = 'redis://default:eEmCvH0ZDywTtBsCarHiFEwmUyfNz7tS@redis-14813.c304.europe-west1-2.gce.cloud.redislabs.com:14813'
+
+CELERY_RESULT_BACKEND = 'redis://default:eEmCvH0ZDywTtBsCarHiFEwmUyfNz7tS@redis-14813.c304.europe-west1-2.gce.cloud.redislabs.com:14813'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+CELERY_IMPORTS = ('myapp.tasks', )
+
+CELERY_BEAT_SCHEDULE = {
+    'print-users-count': {
+        'task': 'myapp.tasks.print_user_count',
+        'schedule': crontab(minute='*'),
+    },
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -45,6 +62,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'user',
+    'book',
+    'purchase',
+    'myapp',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
